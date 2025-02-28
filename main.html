@@ -8,36 +8,52 @@
 
 <body>	
 	<script>
-		function secondHighest(arr) {
-			if(arr.length < 2){
-				return "-infinity";
-			}
-			arr = arr.map(Number);
-			let first = -Infinity;
-			let second = -Infinity;
-			for(let i =0;i<=arr.length;i++){
-				if(arr[i] > 1st){
-					first = arr[i];
-					second = 1st;
-					
-				}elseif(arr[i]>second && arr[i]<first){
-					second = arr[i];
-				}
-			}
-			return second
-			
-		}
+    // Function to find the second highest element
+    function secondHighest(arr) {
+        if (arr.length < 2) {
+            return -Infinity;  // Return -Infinity if there are fewer than 2 elements
+        }
 
-		function Main() {
-			var n = prompt("Enter the number of elements");
-			var arr = []; 
-			for (var i = 0; i < n; i++) {
-				arr[i] = prompt("Enter element " + (i+1));
-			}
-			alert(secondHighest(arr)); 
-		}
-		Main();
-	</script>
+        let max1 = -Infinity;  // max1 will store the highest number
+        let max2 = -Infinity;  // max2 will store the second-highest number
+
+        // Iterate through the array to find the highest and second-highest values
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] > max1) {
+                max2 = max1;  // Update second-highest to the previous highest
+                max1 = arr[i];  // Update highest to the current element
+            } else if (arr[i] > max2 && arr[i] < max1) {
+                max2 = arr[i];  // Update second-highest if a new candidate is found
+            }
+        }
+
+        // If max2 is still -Infinity, it means there was no second unique element
+        if (max2 === -Infinity) {
+            return -Infinity;
+        }
+
+        return max2;  // Return the second-highest number
+    }
+
+    // Main function to get user input and call secondHighest
+    function Main() {
+        var n = prompt("Enter the number of elements");
+        var arr = []; 
+
+        // Collect array elements and convert them to numbers
+        for (var i = 0; i < n; i++) {
+            // Convert the prompt input to a number
+            var element = prompt("Enter element " + (i + 1));
+            arr[i] = Number(element);  // Convert  string input to number
+        }
+
+        // Call the secondHighest function and display the result
+        alert(secondHighest(arr));
+    }
+
+    Main();  // Call the Main function to start the process
+</script>
+
 
     <script type="text/javascript" src="./script.js">
 </script>
